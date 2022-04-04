@@ -1,0 +1,187 @@
+#!/system/bin/sh
+# chwf - Change Weather Format
+#
+# Description:
+#    A script for T-UI Launcher to easily modify weather
+#    format by letting the user choose what fields
+#    to display on the weather status line.
+#
+# By: DeadRabbit
+# Telegram: https://t.me/deadrabbit404
+# Github: https://github.com/deadrabbit404
+
+# Get script's basename
+PROGNAME=${0##*/}
+
+# Array to contain user's valid choices
+FIELDNUM_ARRAY=()
+
+# Weather format for each field
+WEATHER="#[Thunderstorm\/ ][Drizzle\/ ][Rain\/ ][Snow\/ﰕ ][Mist\/ ][Smoke\/ ][Haze\/ ][Dust\/ ][Fog\/ [Sand\/ ][Ash\/ ][Squall\/ ][Tornado\/ ][Clear\/ ][Clouds\/ ]%main %description"
+TEMP=" %temp°C"
+PRESSURE=" %pressure hPa"
+HUMIDITY=" %humidity%"
+VISIBILITY=" %visibility\$(\/1000) km"
+SPEED="龍 %speed\$(*3.6) km\/h"
+LOCATION=" %name"
+COORD=" [%lon, %lat]"
+
+# The location of behavior.xml
+TARGET="/sdcard/t-ui/behavior.xml"
+BACKUPFILE="/sdcard/t-ui/behavior.xml.bak"
+
+print_header () {
+    printf "%s\n" \
+        "################################"\
+        "#                              #"\
+        "# chwf - Change Weather Format #"\
+        "#                              #"\
+        "################################"\
+    
+    printf " \n"
+}
+
+show_help () {
+# Print help and usage message
+    padding=-14
+    print_header
+    printf "%s\n" \
+        "USAGE: $PROGNAME [-h, --help] [-v, --version]"\
+        "            [-l, --list] [-r, --restore]"\
+        "            [N1 N2 N3...]"
+
+    printf " \n"
+    printf "  %${padding}s %s\n" \
+        "N1 N2 N3..." "The numbers that correspond to" \
+        "" "each weather field." \
+        "-l, --list" "List available weather fields." \
+        "-r, --restore" "Restore previous format." \
+        "-v, --version" "Show version information." \
+        "-h, --help" "Print this help message."
+
+    exit 1
+}
+
+show_version () {
+    version="v0.1"
+    echo "chwf, version $version"
+    exit 0
+}
+
+list_weather_fields () {
+# List available weather fields
+    print_header
+    printf "Available weather fields:\n \n"
+    printf "  %s\n" \
+        "[1] Weather Condition" \
+        "[2] Temperature" \
+        "[3] Atmospheric Pressure" \
+        "[4] Humidity" \
+        "[5] Visibility" \
+        "[6] Wind Speed" \
+        "[7] Location" \
+        "[8] Coordinates"
+
+    printf " \nYou can choose multiple fields separated by space.\n"
+    printf "Ex: \`chwf 7 1 2 4\`\n"
+
+    exit 0
+}
+
+build_format () {
+# Join all weather fields
+    glue=" • "
+    for i in ${FIELDNUM_ARRAY[@]}
+    do
+        case $i in
+            1)
+                format="${format:+"$format$glue"}$WEATHER"
+                ;;
+            2)
+                format="${format:+"$format$glue"}$TEMP"
+                ;;
+            3)
+                format="${format:+"$format$glue"}$PRESSURE"
+                ;;
+            4)
+                format="${format:+"$format$glue"}$HUMIDITY"
+                ;;
+            5)
+                format="${format:+"$format$glue"}$VISIBILITY"
+                ;;
+            6)
+                format="${format:+"$format$glue"}$SPEED"
+                ;;
+            7)
+                format="${format:+"$format$glue"}$LOCATION"
+                ;;
+            8)
+                format="${format:+"$format$glue"}$COORD"
+        esac
+    done
+    
+    echo "$format"
+}
+
+restore_format () {
+# Restore previous weather format
+    if [ -f "$BACKUPFILE" ]
+    then
+        echo ":: Restoring previous weather format..."
+        sleep 1
+        mv "$BACKUPFILE" "$TARGET"
+        echo ":: Done. Please restart t-ui."
+    else
+        echo "No previous format found. Aborting..."
+    fi
+    exit $?
+}
+
+replace_weather () {
+# Replace the current weather format with
+# the fields chosen by the user
+    printf ":: Building format from chosen fields...\n"
+    sleep 1
+    format=`build_format`
+    printf ":: Replacing weather format, please wait...\n"
+    sleep 1
+
+    # Search and replace operation
+    sed -i.bak "s/\(<weather_format value=\"\).*\(\"\/>\)/\1$format\2/" $TARGET
+
+    # Verify if operation is successful
+    [ $? -eq 0 ] \
+        && printf ":: Success! Please restart t-ui.\n" \
+        || printf ":: Operation failed!: An error occured.\n"
+}
+
+# Script starts here
+# Show list of weather fields
+# when invoke without parameter.
+[ $# -eq 0 ] && list_weather_fields
+
+for arg in $@
+do
+    case $arg in
+        -h|--help)
+            show_help
+            ;;
+        -v|--version)
+            show_version
+            ;;
+        -r|--restore)
+            restore_format
+            ;;
+        -l|--list|%)
+            list_weather_fields
+            ;;
+        [12345678])
+            FIELDNUM_ARRAY+=($arg)
+            ;;
+        *)
+            printf "Invalid option/argument: '$arg'. Try again\n"
+            exit 1
+    esac
+done
+
+replace_weather
