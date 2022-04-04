@@ -13,9 +13,27 @@ weather status line.
 * All weather fields have icons
 
 ## Installation
-**Via termux**
+**Option 1: Via termux**
 * `apt update && apt install -y git`
 * `git clone https://github.com/deadrabbit404/chwf.git`
 * `cd chwf && bash setup.sh`
 * Restart t-ui when setup is done.
 
+**Option 2: Via manual download**
+* Download the latest release of chwf and extract
+it to your internal storage.
+* On t-ui launcher, change directory to the
+extracted folder.  
+Example: `cd chwf-0.1`
+* Type `sh setup.sh`. Then `restart` t-ui when
+setup is done.
+
+## Running the script
+Just type `chwf` to execute the script or `chwf -h`
+to show help.
+
+## Themes
+Looking for cool themes like the one in the image above? Visit
+[M4dGun's t-ui themes](https://github.com/M4dGun/t-ui_themes)
+repository. It's a  collection of the best themes for
+T-UI and T-UI Expert Launcher made by the community.
