@@ -20,8 +20,8 @@ weather status line.
 * Restart t-ui when setup is done.
 
 **Option 2: Via manual download**
-* Download the latest release of chwf and extract
-it to your internal storage.
+* Download [latest release](https://github.com/deadrabbit404/chwf/releases/tag/v0.1.1)
+of chwf and extract it to your internal storage.
 * On t-ui launcher, change directory to the
 extracted folder.  
 Example: `cd chwf-0.1.1`
