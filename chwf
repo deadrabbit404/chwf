@@ -13,6 +13,9 @@
 # Get script's basename
 PROGNAME=${0##*/}
 
+# The behavior.xml used by the theme
+BEHAVIORXML="/sdcard/t-ui/behavior.xml"
+
 # Array to contain user's valid choices
 FIELDNUM_ARRAY=()
 
@@ -156,9 +159,11 @@ replace_weather () {
 }
 
 # Script starts here
-# Show list of weather fields
-# when invoke without parameter.
+# Show list of weather fields when invoke without parameter.
 [ $# -eq 0 ] && list_weather_fields
+
+# Get the alias_param_marker used by the theme
+ALIAS_PARAM_MARKER=`grep 'alias_param_marker' $BEHAVIORXML | sed "s/^.*\"\(.*\)\"\/>.*\$/\1/"`
 
 for arg in $@
 do
@@ -172,7 +177,7 @@ do
         -r|--restore)
             restore_format
             ;;
-        -l|--list|%)
+        -l|--list|$ALIAS_PARAM_MARKER)
             list_weather_fields
             ;;
         [12345678])
