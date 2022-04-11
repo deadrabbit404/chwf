@@ -24,13 +24,13 @@ weather status line.
 it to your internal storage.
 * On t-ui launcher, change directory to the
 extracted folder.  
-Example: `cd chwf-0.1`
+Example: `cd chwf-0.1.1`
 * Type `sh setup.sh`. Then `restart` t-ui when
 setup is done.
 
 ## Running the script
-Just type `chwf` to execute the script or `chwf -h`
-to show help.
+To execute the script, just type `chwf`. For more info, type
+`chwf -h` to print help message.
 
 ## Themes
 Looking for cool themes like the one in the image above? Visit
