@@ -20,7 +20,7 @@ BEHAVIORXML="/sdcard/t-ui/behavior.xml"
 FIELDNUM_ARRAY=()
 
 # Weather format for each field
-WEATHER="#[Thunderstorm\/ ][Drizzle\/ ][Rain\/ ][Snow\/ﰕ ][Mist\/ ][Smoke\/ ][Haze\/ ][Dust\/ ][Fog\/ [Sand\/ ][Ash\/ ][Squall\/ ][Tornado\/ ][Clear\/ ][Clouds\/ ]%main %description"
+WEATHER="#[Thunderstorm\/ ][Drizzle\/ ][Rain\/ ][Snow\/ﰕ ][Mist\/ ][Smoke\/ ][Haze\/ ][Dust\/ ][Fog\/ ][Sand\/ ][Ash\/ ][Squall\/ ][Tornado\/ ][Clear\/ ][Clouds\/ ]%main %description"
 TEMP=" %temp°C"
 PRESSURE=" %pressure hPa"
 HUMIDITY=" %humidity%"
