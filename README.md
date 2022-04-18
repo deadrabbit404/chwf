@@ -12,21 +12,17 @@ weather status line.
 * Eight weather fields to choose from
 * All weather fields have icons
 
+## Prerequisite
+* Termux
+
+_Install termux from Playstore or F-droid_
+
 ## Installation
-**Option 1: Via termux**
+**Open termux app and execute the commands below:**
 * `apt update && apt install -y git`
 * `git clone https://github.com/deadrabbit404/chwf.git`
 * `cd chwf && bash setup.sh`
 * Restart t-ui when setup is done.
-
-**Option 2: Via manual download**
-* Download [latest release](https://github.com/deadrabbit404/chwf/releases/tag/v0.1.1)
-of chwf and extract it to your internal storage.
-* On t-ui launcher, change directory to the
-extracted folder.  
-Example: `cd chwf-0.1.1`
-* Type `sh setup.sh`. Then `restart` t-ui when
-setup is done.
 
 ## Running the script
 To execute the script, just type `chwf`. For more info, type
