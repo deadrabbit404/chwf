@@ -15,8 +15,8 @@ weather status line.
 ## Prerequisite
 * Termux
 
-_Install termux from Playstore or F-droid_
-
+_Install termux from [F-droid](https://f-droid.org/en/packages/com.termux/)
+or from its github repo from [here](https://github.com/termux/termux-app)._
 ## Installation
 **Open termux app and execute the commands below:**
 * `apt update && apt install -y git`
@@ -25,7 +25,7 @@ _Install termux from Playstore or F-droid_
 * Restart t-ui when setup is done.
 
 ## Running the script
-To execute the script, just type `chwf`. For more info, type
+On your t-ui launcher, just type `chwf`. For more info, type
 `chwf -h` to print help message.
 
 ## Themes
